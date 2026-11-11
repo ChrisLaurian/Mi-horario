@@ -74,11 +74,30 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 .pal{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
 .sw{width:24px;height:24px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--ln);cursor:pointer;padding:0;transition:transform .15s,box-shadow .2s}
 .sw:hover{transform:scale(1.18)}.sw.on{box-shadow:0 0 0 2px var(--tx)}
+.pre{width:40px;height:24px;border-radius:12px;border:2px solid var(--card);box-shadow:0 0 0 1px var(--ln);cursor:pointer;padding:0;transition:transform .15s,box-shadow .2s}
+.pre:hover{transform:scale(1.12)}.pre.on{box-shadow:0 0 0 2px var(--tx)}
+#pn{font-size:12px;color:var(--mut);margin-top:6px}#pet.talk #pn{display:none}
+#wm svg g:first-of-type circle:nth-child(1){fill:var(--c1,var(--wb))}
+#wm svg g:first-of-type circle:nth-child(2){fill:var(--c2,var(--wb))}
+#wm svg g:first-of-type circle:nth-child(3){fill:var(--c3,var(--wb))}
+#wm svg g:first-of-type circle:nth-child(4){fill:var(--c4,var(--wb))}
+#wm svg g:first-of-type circle:nth-child(5){fill:var(--c5,var(--wb))}
+#wm circle[r="2"]{fill:var(--pu,#1d1d1b)}
 #cp{width:28px;height:28px;border:0;padding:0;background:none;border-radius:50%;cursor:pointer}
 #cp::-webkit-color-swatch-wrapper{padding:0}#cp::-webkit-color-swatch{border:0;border-radius:50%}#cp::-moz-color-swatch{border:0;border-radius:50%}
 #pet.hide .bub{display:none}
 .sg{transform-box:fill-box;transform-origin:center;animation:wig 1.8s ease-in-out infinite;animation-delay:var(--d)}
 @keyframes wig{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+#pet.talk{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:6}
+#pet.hide.talk .bub{display:block}
+#pet.talk #wm svg{width:84px}
+#pet.talk .bub{background:var(--warn);color:#1d1d1b;border-color:#d9c400;font-weight:600;font-size:17px;animation:rise .4s cubic-bezier(.2,.7,.2,1) backwards,glow 2s ease-in-out .4s infinite}
+#pet.talk .bub::before{background:var(--warn);border-color:#d9c400}
+#pet.talk #ph{font-style:normal;font-size:17px}
+#pet.talk #ph small{display:block;font-weight:400;font-size:14px;margin-top:2px}
+#pet.talk .pal,#pet.talk #hd,#pet.talk .lab{color:#1d1d1b}#pet.talk .pal,#pet.talk #hd{display:none}
+#pet.talk .sg{animation-name:hop;animation-duration:.7s}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 #gate .box{background:var(--card);border:1px solid var(--ln);border-radius:20px;box-shadow:var(--sh);padding:24px;width:100%;max-width:340px;animation:rise .35s cubic-bezier(.2,.7,.2,1)}
 #gate input{width:100%;margin:14px 0 6px;padding:12px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font-size:16px}
 #gate .er{color:var(--now);font-size:13px;min-height:18px}
@@ -89,7 +108,7 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 @media (prefers-reduced-motion:reduce){*,*::after,*::before{animation:none!important;transition:none!important}}
 </style></head><body><main>
 <header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button id="an" aria-label="Cambiar animación">✨ Subir</button><button id="th" aria-label="Cambiar tema">🌙</button></div></header>
-<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg></button><div class="bub"><p class="lab" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="pal"></div><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
+<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg></button><div class="bub"><p class="lab" id="lb" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="pal"></div><div class="pal" id="pre" style="margin-top:8px"></div><div id="pn"></div><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
 <div class="sec"><p class="lab">Materia</p><div class="row" id="subs"></div></div>
 <div class="sec"><p class="lab">Día</p><div class="seg" id="days"></div></div>
 <div id="alert"></div>
@@ -164,7 +183,7 @@ if(ce){cls="warn";const mn=Math.ceil(ce.e-n);pre=ce===lc?"<div>Comenzar limpieza
 if(nx){cls="warn";h="<div>En "+Math.ceil(nx.s-n)+" min: "+nx.n+" ("+fm(nx.s)+")"+(nx.role?" · Rol: "+nx.role:"")+"</div><small>"+(DESC[nx.role]||"")+"</small>"}
 else if(cur){h="<div><b>Ahora:</b> "+cur.n+" hasta "+fm(cur.e)+(cur.role?" · Rol: "+cur.role:"")+"</div>"}
 else{const f=ev.find(x=>x.s>n);h=f?"<div>Siguiente: "+f.n+" a las "+fm(f.s)+"</div>":"<div>Terminaste por hoy.</div>"}}
-h=pre+h;if(h!==last){last=h;const a=$("alert");a.className=cls+" pop";a.innerHTML=h}}
+h=pre+h;if(h!==last){last=h;const a=$("alert");if(cls==="warn"){speak(h);a.style.display="none"}else{speak(null);a.style.display="";a.className="pop";a.innerHTML=h}}}
 $("sim").oninput=draw;setInterval(tick,15000);
 $("rs").onclick=async()=>{if(!await ask())return;sch=def();try{localStorage.removeItem("sch")}catch(e){}head();draw();$("msg").textContent="Horario restaurado."};
 function ask(){return new Promise(res=>{const g=$("gate"),i=$("pw");i.value="";$("er").textContent="";g.classList.add("on");i.focus();
@@ -204,16 +223,28 @@ function setAn(){$("tl").dataset.a=AN[ai][0];$("an").textContent="✨ "+AN[ai][1
 $("an").onclick=()=>{ai=(ai+1)%AN.length;try{localStorage.setItem("an",ai)}catch(e){}setAn();draw()};
 const PH=["Hoy no controlas todo, pero sí cómo respondes. Empieza por ahí.","Haz bien lo de hoy; el mañana te lo agradecerá.","Lo que te estorba en el camino puede convertirse en el camino.","No te quejes de la lluvia: ponte el abrigo y sigue.","La calma también es una forma de fuerza.","Sé como la roca: la ola rompe y ella sigue en pie.","Un buen día se construye una tarea a la vez.","Si algo no depende de ti, suéltalo. Si depende, hazlo.","Empieza ahora; el momento perfecto no llega solo.","Tu mente es el lugar donde de verdad mandas. Cuídala.","La paciencia no es esperar: es mantener la calma mientras trabajas.","Cada grupo es una oportunidad de practicar la paciencia.","No gastes la mañana temiendo la tarde.","Lo difícil de hoy será tu experiencia de mañana.","Haz lo correcto aunque nadie lo aplauda.","Menos opinar sobre lo que pasa, más actuar con lo que tienes.","Este día no volverá. Úsalo con intención.","La disciplina es hacerlo bien incluso cuando no hay ganas.","No eliges el clima, pero sí tu actitud.","Un error es un maestro con prisa: escúchalo y sigue.","Ser amable no cuesta nada y rinde muchísimo.","Cuando algo te moleste, pregúntate si está en tus manos.","Trabaja con calma, como quien tiene todo el tiempo y no pierde ninguno.","La gratitud convierte lo común en suficiente.","Haz tu parte y deja el resultado en paz.","Puedes ser mejor que ayer sin competir con nadie.","No te midas por lo que logras hoy, sino por cómo lo intentas.","La tranquilidad se entrena, como un músculo.","Quien se prepara para lo difícil lo encuentra más ligero.","Respira. Lo que viene lo puedes manejar.","Los pequeños hábitos de hoy son el carácter de mañana."];
 const di=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/864e5);
-$("ph").textContent=PH[((di%PH.length)+PH.length)%PH.length];
+let daily=PH[((di%PH.length)+PH.length)%PH.length];$("ph").textContent=daily;
+function speak(h){const p=$("pet");if(h){$("ph").innerHTML=h;$("lb").textContent="Aviso";p.classList.add("talk")}else{$("ph").textContent=daily;$("lb").textContent="Frase del día";p.classList.remove("talk")}}
 let hid=false;try{hid=localStorage.getItem("pet")==="0"}catch(e){}
 function setPet(){$("pet").classList.toggle("hide",hid);try{localStorage.setItem("pet",hid?"0":"1")}catch(e){}}
 $("wm").onclick=()=>{hid=!hid;setPet()};$("hd").onclick=()=>{hid=true;setPet()};
 const WC=["#6cc04a","#4a86c7","#8a5cd6","#e83be0","#f5951d","#f2c230","#e2231a","#2bb5a5","#8a8a85"];
 let wc=WC[0];try{const c=localStorage.getItem("wc");if(/^#[0-9a-f]{6}$/i.test(c))wc=c}catch(e){}
-function setWc(c){wc=c;$("pet").style.setProperty("--wb",c);try{localStorage.setItem("wc",c)}catch(e){}$("pal").querySelectorAll(".sw").forEach(b=>b.classList.toggle("on",b.dataset.c===c));$("cp").value=c}
+const PRE=[{n:"Beetlejuice",c:["#f4f4f0","#111111","#f4f4f0","#111111","#f4f4f0"],h:"#e6efe0",s:"#111111",p:"#2fb344"},
+{n:"Evangelion 01",c:["#5b2d91","#7cd62a","#5b2d91","#7cd62a","#5b2d91"],h:"#7a45c0",s:"#241040",p:"#ff9d00"},
+{n:"Atardecer",c:["#ff7e5f","#feb47b","#ff7e5f","#feb47b","#ff7e5f"],h:"#ffd194",s:"#b5483a",p:"#5a1f14"},
+{n:"Océano",c:["#0077b6","#00b4d8","#0077b6","#90e0ef","#0077b6"],h:"#48cae4",s:"#023e5e",p:"#03045e"},
+{n:"Arcoíris",c:["#e2231a","#f5951d","#f2c230","#2e8b2e","#4a86c7"],h:"#8a5cd6",s:"#3a2a50",p:"#1d1d1b"},
+{n:"Halloween",c:["#f5951d","#1d1d1d","#f5951d","#1d1d1d","#f5951d"],h:"#f5951d",s:"#1d1d1d",p:"#6b2fb3"},
+{n:"Chicle",c:["#ffb3c6","#a8ecd9","#ffb3c6","#a8ecd9","#ffb3c6"],h:"#ffd1dc",s:"#c2507a",p:"#6b2f4a"}];
+let pi=-1;try{const x=localStorage.getItem("wp");if(x!==null&&x!==""&&PRE[+x])pi=+x}catch(e){}
+function mark(){$("pal").querySelectorAll(".sw").forEach(b=>b.classList.toggle("on",pi<0&&b.dataset.c===wc));$("pre").querySelectorAll(".pre").forEach((b,i)=>b.classList.toggle("on",i===pi));$("pn").textContent=pi>=0?"Estilo: "+PRE[pi].n:""}
+function setWc(c){wc=c;pi=-1;const s=$("pet").style;s.setProperty("--wb",c);["--c1","--c2","--c3","--c4","--c5","--wh","--ws","--pu"].forEach(k=>s.removeProperty(k));try{localStorage.setItem("wc",c);localStorage.removeItem("wp")}catch(e){}$("cp").value=c;mark()}
+function setPre(i){pi=i;const p=PRE[i],s=$("pet").style;p.c.forEach((c,k)=>s.setProperty("--c"+(k+1),c));s.setProperty("--wh",p.h);s.setProperty("--ws",p.s);s.setProperty("--pu",p.p);try{localStorage.setItem("wp",i)}catch(e){}mark()}
 WC.forEach(c=>{const b=document.createElement("button");b.className="sw";b.dataset.c=c;b.style.background=c;b.setAttribute("aria-label","Color "+c);b.onclick=()=>setWc(c);$("pal").append(b)});
 const cp=document.createElement("input");cp.type="color";cp.id="cp";cp.title="Color personalizado";cp.oninput=()=>setWc(cp.value);$("pal").append(cp);
-setWc(wc);
+PRE.forEach((p,i)=>{const b=document.createElement("button");b.className="pre";b.title=p.n;b.setAttribute("aria-label","Estilo "+p.n);b.style.background="linear-gradient(90deg,"+p.c[0]+" 0 33%,"+p.c[1]+" 33% 66%,"+p.h+" 66%)";b.onclick=()=>setPre(i);$("pre").append(b)});
+const p0=pi;setWc(wc);if(p0>=0)setPre(p0);
 setPet();
 setAn();head();draw();
 </script></body></html>
