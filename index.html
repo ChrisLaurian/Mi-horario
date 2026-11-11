@@ -65,18 +65,19 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 #wm:hover{transform:scale(1.06) rotate(-3deg)}#wm:active{transform:scale(.94)}
 #wm svg{width:96px;height:auto;display:block;transition:width .35s cubic-bezier(.2,.7,.2,1)}
 #pet.hide #wm svg{width:56px}
-.bub{position:relative;flex:1;background:var(--card);border:1px solid var(--ln);border-radius:18px;box-shadow:var(--sh);padding:14px 40px 14px 18px;animation:rise .5s cubic-bezier(.2,.7,.2,1) backwards}
+.bub{position:relative;flex:1;background:var(--card);border:1px solid var(--ln);border-radius:18px;box-shadow:var(--sh);padding:14px 72px 14px 18px;animation:rise .5s cubic-bezier(.2,.7,.2,1) backwards}
 .bub::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--card);border-left:1px solid var(--ln);border-bottom:1px solid var(--ln);transform:translateY(-50%) rotate(45deg)}
 #ph{font-size:15px;line-height:1.45;font-style:italic}
 #hd{position:absolute;top:8px;right:8px;background:none;border:0;color:var(--mut);cursor:pointer;font-size:14px;border-radius:8px;width:28px;height:28px}
 #hd:hover{background:var(--bg)}
+#pk{position:absolute;top:8px;right:38px;background:none;border:0;cursor:pointer;font-size:14px;border-radius:8px;width:28px;height:28px;transition:transform .2s}#pk:hover{background:var(--bg);transform:rotate(-12deg)}
 #pet{--wb:#6cc04a;--ws:color-mix(in srgb,var(--wb) 68%,#000);--wh:color-mix(in srgb,var(--wb) 86%,#fff)}
-.pal{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.pal{display:none;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}#pet.pick .pal{display:flex}
 .sw{width:24px;height:24px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--ln);cursor:pointer;padding:0;transition:transform .15s,box-shadow .2s}
 .sw:hover{transform:scale(1.18)}.sw.on{box-shadow:0 0 0 2px var(--tx)}
 .pre{width:40px;height:24px;border-radius:12px;border:2px solid var(--card);box-shadow:0 0 0 1px var(--ln);cursor:pointer;padding:0;transition:transform .15s,box-shadow .2s}
 .pre:hover{transform:scale(1.12)}.pre.on{box-shadow:0 0 0 2px var(--tx)}
-#pn{font-size:12px;color:var(--mut);margin-top:6px}#pet.talk #pn{display:none}
+#pn{display:none}#pet.talk #pn{display:none}
 #wm svg g:first-of-type circle:nth-child(1){fill:var(--c1,var(--wb))}
 #wm svg g:first-of-type circle:nth-child(2){fill:var(--c2,var(--wb))}
 #wm svg g:first-of-type circle:nth-child(3){fill:var(--c3,var(--wb))}
@@ -95,7 +96,7 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 #pet.talk .bub::before{background:var(--warn);border-color:#d9c400}
 #pet.talk #ph{font-style:normal;font-size:17px}
 #pet.talk #ph small{display:block;font-weight:400;font-size:14px;margin-top:2px}
-#pet.talk .pal,#pet.talk #hd,#pet.talk .lab{color:#1d1d1b}#pet.talk .pal,#pet.talk #hd{display:none}
+#pet.talk .pal,#pet.talk #hd,#pet.talk .lab{color:#1d1d1b}#pet.talk .pal,#pet.talk #hd,#pet.talk #pk{display:none}
 #pet.talk .sg{animation-name:hop;animation-duration:.7s}
 @keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 #gate .box{background:var(--card);border:1px solid var(--ln);border-radius:20px;box-shadow:var(--sh);padding:24px;width:100%;max-width:340px;animation:rise .35s cubic-bezier(.2,.7,.2,1)}
@@ -108,7 +109,7 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 @media (prefers-reduced-motion:reduce){*,*::after,*::before{animation:none!important;transition:none!important}}
 </style></head><body><main>
 <header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button id="an" aria-label="Cambiar animación">✨ Subir</button><button id="th" aria-label="Cambiar tema">🌙</button></div></header>
-<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg></button><div class="bub"><p class="lab" id="lb" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="pal"></div><div class="pal" id="pre" style="margin-top:8px"></div><div id="pn"></div><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
+<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg></button><div class="bub"><p class="lab" id="lb" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="pal"></div><div class="pal" id="pre" style="margin-top:8px"></div><div id="pn"></div><button id="pk" aria-label="Colores" title="Colores">🎨</button><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
 <div class="sec"><p class="lab">Materia</p><div class="row" id="subs"></div></div>
 <div class="sec"><p class="lab">Día</p><div class="seg" id="days"></div></div>
 <div id="alert"></div>
@@ -230,12 +231,12 @@ function setPet(){$("pet").classList.toggle("hide",hid);try{localStorage.setItem
 $("wm").onclick=()=>{hid=!hid;setPet()};$("hd").onclick=()=>{hid=true;setPet()};
 const WC=["#6cc04a","#4a86c7","#8a5cd6","#e83be0","#f5951d","#f2c230","#e2231a","#2bb5a5","#8a8a85"];
 let wc=WC[0];try{const c=localStorage.getItem("wc");if(/^#[0-9a-f]{6}$/i.test(c))wc=c}catch(e){}
-const PRE=[{n:"Beetlejuice",c:["#f4f4f0","#111111","#f4f4f0","#111111","#f4f4f0"],h:"#e6efe0",s:"#111111",p:"#2fb344"},
+const PRE=[{n:"Beetlejuice",c:["#f4f4f0","#111111","#f4f4f0","#111111","#f4f4f0"],h:"#8bd450",s:"var(--tx)",p:"#111111"},
 {n:"Evangelion 01",c:["#5b2d91","#7cd62a","#5b2d91","#7cd62a","#5b2d91"],h:"#7a45c0",s:"#241040",p:"#ff9d00"},
 {n:"Atardecer",c:["#ff7e5f","#feb47b","#ff7e5f","#feb47b","#ff7e5f"],h:"#ffd194",s:"#b5483a",p:"#5a1f14"},
 {n:"Océano",c:["#0077b6","#00b4d8","#0077b6","#90e0ef","#0077b6"],h:"#48cae4",s:"#023e5e",p:"#03045e"},
 {n:"Arcoíris",c:["#e2231a","#f5951d","#f2c230","#2e8b2e","#4a86c7"],h:"#8a5cd6",s:"#3a2a50",p:"#1d1d1b"},
-{n:"Halloween",c:["#f5951d","#1d1d1d","#f5951d","#1d1d1d","#f5951d"],h:"#f5951d",s:"#1d1d1d",p:"#6b2fb3"},
+{n:"Halloween",c:["#f5951d","#1d1d1d","#f5951d","#1d1d1d","#f5951d"],h:"#f5951d",s:"var(--tx)",p:"#6b2fb3"},
 {n:"Chicle",c:["#ffb3c6","#a8ecd9","#ffb3c6","#a8ecd9","#ffb3c6"],h:"#ffd1dc",s:"#c2507a",p:"#6b2f4a"}];
 let pi=-1;try{const x=localStorage.getItem("wp");if(x!==null&&x!==""&&PRE[+x])pi=+x}catch(e){}
 function mark(){$("pal").querySelectorAll(".sw").forEach(b=>b.classList.toggle("on",pi<0&&b.dataset.c===wc));$("pre").querySelectorAll(".pre").forEach((b,i)=>b.classList.toggle("on",i===pi));$("pn").textContent=pi>=0?"Estilo: "+PRE[pi].n:""}
@@ -245,6 +246,7 @@ WC.forEach(c=>{const b=document.createElement("button");b.className="sw";b.datas
 const cp=document.createElement("input");cp.type="color";cp.id="cp";cp.title="Color personalizado";cp.oninput=()=>setWc(cp.value);$("pal").append(cp);
 PRE.forEach((p,i)=>{const b=document.createElement("button");b.className="pre";b.title=p.n;b.setAttribute("aria-label","Estilo "+p.n);b.style.background="linear-gradient(90deg,"+p.c[0]+" 0 33%,"+p.c[1]+" 33% 66%,"+p.h+" 66%)";b.onclick=()=>setPre(i);$("pre").append(b)});
 const p0=pi;setWc(wc);if(p0>=0)setPre(p0);
+$("pk").onclick=()=>$("pet").classList.toggle("pick");
 setPet();
 setAn();head();draw();
 </script></body></html>
