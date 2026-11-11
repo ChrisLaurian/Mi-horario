@@ -58,12 +58,38 @@ button.t{background:var(--card);color:var(--tx);border:1px solid var(--ln);borde
 button.t:hover{box-shadow:var(--sh);transform:translateY(-1px)}button.t:active{transform:scale(.97)}
 input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:7px}
 #msg{font-size:13px;color:var(--mut);min-height:20px}
+#gate{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);padding:20px}
+#gate.on{display:flex}
+#pet{display:flex;align-items:center;gap:14px;margin:0 0 24px}
+#wm{background:none;border:0;padding:0;cursor:pointer;flex:none;transition:transform .3s}
+#wm:hover{transform:scale(1.06) rotate(-3deg)}#wm:active{transform:scale(.94)}
+#wm svg{width:96px;height:auto;display:block;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+#pet.hide #wm svg{width:56px}
+.bub{position:relative;flex:1;background:var(--card);border:1px solid var(--ln);border-radius:18px;box-shadow:var(--sh);padding:14px 40px 14px 18px;animation:rise .5s cubic-bezier(.2,.7,.2,1) backwards}
+.bub::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--card);border-left:1px solid var(--ln);border-bottom:1px solid var(--ln);transform:translateY(-50%) rotate(45deg)}
+#ph{font-size:15px;line-height:1.45;font-style:italic}
+#hd{position:absolute;top:8px;right:8px;background:none;border:0;color:var(--mut);cursor:pointer;font-size:14px;border-radius:8px;width:28px;height:28px}
+#hd:hover{background:var(--bg)}
+#pet{--wb:#6cc04a;--ws:color-mix(in srgb,var(--wb) 68%,#000);--wh:color-mix(in srgb,var(--wb) 86%,#fff)}
+.pal{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.sw{width:24px;height:24px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--ln);cursor:pointer;padding:0;transition:transform .15s,box-shadow .2s}
+.sw:hover{transform:scale(1.18)}.sw.on{box-shadow:0 0 0 2px var(--tx)}
+#cp{width:28px;height:28px;border:0;padding:0;background:none;border-radius:50%;cursor:pointer}
+#cp::-webkit-color-swatch-wrapper{padding:0}#cp::-webkit-color-swatch{border:0;border-radius:50%}#cp::-moz-color-swatch{border:0;border-radius:50%}
+#pet.hide .bub{display:none}
+.sg{transform-box:fill-box;transform-origin:center;animation:wig 1.8s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes wig{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+#gate .box{background:var(--card);border:1px solid var(--ln);border-radius:20px;box-shadow:var(--sh);padding:24px;width:100%;max-width:340px;animation:rise .35s cubic-bezier(.2,.7,.2,1)}
+#gate input{width:100%;margin:14px 0 6px;padding:12px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font-size:16px}
+#gate .er{color:var(--now);font-size:13px;min-height:18px}
+#gate .bt{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(3);opacity:0}}
 @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(226,35,26,0)}50%{box-shadow:0 0 0 7px rgba(226,35,26,.18)}}
 @media (prefers-reduced-motion:reduce){*,*::after,*::before{animation:none!important;transition:none!important}}
 </style></head><body><main>
 <header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button id="an" aria-label="Cambiar animación">✨ Subir</button><button id="th" aria-label="Cambiar tema">🌙</button></div></header>
+<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg></button><div class="bub"><p class="lab" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="pal"></div><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
 <div class="sec"><p class="lab">Materia</p><div class="row" id="subs"></div></div>
 <div class="sec"><p class="lab">Día</p><div class="seg" id="days"></div></div>
 <div id="alert"></div>
@@ -75,6 +101,7 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 <button class="t" id="rsr">Restaurar roles</button>
 <label class="mut">Hora de prueba <input type="time" id="sim"></label></div></div>
 <p id="msg"></p>
+<div id="gate"><div class="box"><b>Contraseña requerida</b><div class="mut">Para cambiar el horario o los roles.</div><input id="pw" type="password" autocapitalize="characters" autocomplete="off" placeholder="Contraseña"><div class="er" id="er"></div><div class="bt"><button class="t" id="gc">Cancelar</button><button class="t" id="go">Entrar</button></div></div></div>
 </main>
 <script>
 const S=["Matemáticas","Humanidades","StudyHall","CODE","Ajedrez","Inglés","Lecto"];
@@ -139,8 +166,12 @@ else if(cur){h="<div><b>Ahora:</b> "+cur.n+" hasta "+fm(cur.e)+(cur.role?" · Ro
 else{const f=ev.find(x=>x.s>n);h=f?"<div>Siguiente: "+f.n+" a las "+fm(f.s)+"</div>":"<div>Terminaste por hoy.</div>"}}
 h=pre+h;if(h!==last){last=h;const a=$("alert");a.className=cls+" pop";a.innerHTML=h}}
 $("sim").oninput=draw;setInterval(tick,15000);
-$("rs").onclick=()=>{sch=def();try{localStorage.removeItem("sch")}catch(e){}head();draw();$("msg").textContent="Horario restaurado."};
-$("up").onclick=()=>$("f").click();
+$("rs").onclick=async()=>{if(!await ask())return;sch=def();try{localStorage.removeItem("sch")}catch(e){}head();draw();$("msg").textContent="Horario restaurado."};
+function ask(){return new Promise(res=>{const g=$("gate"),i=$("pw");i.value="";$("er").textContent="";g.classList.add("on");i.focus();
+const end=v=>{g.classList.remove("on");$("go").onclick=$("gc").onclick=i.onkeydown=null;res(v)};
+const ok=()=>{if(i.value.trim()==="CODE")end(true);else{$("er").textContent="Contraseña incorrecta.";i.value="";i.focus()}};
+$("go").onclick=ok;$("gc").onclick=()=>end(false);i.onkeydown=e=>{if(e.key==="Enter")ok();if(e.key==="Escape")end(false)}})}
+$("up").onclick=async()=>{if(await ask())$("f").click()};
 $("f").onchange=async e=>{const file=e.target.files[0];if(!file)return;const m=$("msg");m.textContent="Leyendo imagen…";
 try{const sm=await claude.use("sample");if(!sm){m.textContent="Leer imágenes no está disponible en esta vista.";return}
 const p="Esta imagen es un horario semanal escolar (lunes a viernes). Cada día tiene grupos A,B1,B2,C (columnas izquierdas, 6 clases cada uno, ignora filas grises de receso) y D,E,F (columnas derechas, 6 clases). Responde SOLO JSON sin texto extra: {\"label\":\"texto de la semana\",\"days\":[{\"A\":[6 materias],\"B1\":[...],\"B2\":[...],\"C\":[...],\"D\":[...],\"E\":[...],\"F\":[...]} x5 días]}. Cada materia debe ser exactamente una de: Matemáticas, Humanidades, StudyHall, CODE, Ajedrez, Inglés, Lecto. Orden de arriba hacia abajo.";
@@ -152,8 +183,8 @@ sch={label:j.label||"Semana nueva",days:j.days};try{localStorage.setItem("sch",J
 head();draw();m.textContent="Horario actualizado. Revísalo; si algo salió mal, vuelve a subir la imagen."}
 catch(x){m.textContent="No pude leer la imagen con seguridad. Prueba con una captura más nítida."}
 e.target.value=""};
-$("upr").onclick=()=>$("fr").click();
-$("rsr").onclick=()=>{const o=JSON.parse(RD);ENT=o.ENT;SAL=o.SAL;DESC=o.DESC;RR=o.RR;try{localStorage.removeItem("roles")}catch(e){}draw();$("msg").textContent="Roles restaurados."};
+$("upr").onclick=async()=>{if(await ask())$("fr").click()};
+$("rsr").onclick=async()=>{if(!await ask())return;const o=JSON.parse(RD);ENT=o.ENT;SAL=o.SAL;DESC=o.DESC;RR=o.RR;try{localStorage.removeItem("roles")}catch(e){}draw();$("msg").textContent="Roles restaurados."};
 $("fr").onchange=async e=>{const file=e.target.files[0];if(!file)return;const m=$("msg");m.textContent="Leyendo roles…";
 try{const sm=await claude.use("sample");if(!sm){m.textContent="Leer imágenes no está disponible en esta vista.";return}
 const p="Esta imagen es una tabla de roles escolares con secciones Entrada, Receso y Salida. Responde SOLO JSON sin texto extra: {\"entrada\":[{\"role\":\"nombre\",\"desc\":\"descripción breve\",\"teachers\":[\"nombres\"]}],\"salida\":[igual],\"receso\":[{\"role\":\"nombre\",\"desc\":\"descripción breve\",\"menor\":\"grupo en columna MENOR\",\"mayor\":\"grupo en columna MAYOR\",\"solo\":0}]}. En receso, solo=1 si la descripción dice SOLO PRIMER RECESO en rotación mayor, solo=2 si dice SOLO SEGUNDO RECESO, 0 si no. Los grupos son A, B1, B2, C, D, E o F. Los profesores deben ser exactamente de: Alma, Lorena, Gabriel, Diego, Study hall, Edgar, Christian.";
@@ -171,5 +202,18 @@ const AN=[["rise","Subir"],["slide","Deslizar"],["zoom","Zoom"],["bounce","Rebot
 let ai=0;try{const a=localStorage.getItem("an");if(a!==null&&AN[+a])ai=+a}catch(e){}
 function setAn(){$("tl").dataset.a=AN[ai][0];$("an").textContent="✨ "+AN[ai][1]}
 $("an").onclick=()=>{ai=(ai+1)%AN.length;try{localStorage.setItem("an",ai)}catch(e){}setAn();draw()};
+const PH=["Hoy no controlas todo, pero sí cómo respondes. Empieza por ahí.","Haz bien lo de hoy; el mañana te lo agradecerá.","Lo que te estorba en el camino puede convertirse en el camino.","No te quejes de la lluvia: ponte el abrigo y sigue.","La calma también es una forma de fuerza.","Sé como la roca: la ola rompe y ella sigue en pie.","Un buen día se construye una tarea a la vez.","Si algo no depende de ti, suéltalo. Si depende, hazlo.","Empieza ahora; el momento perfecto no llega solo.","Tu mente es el lugar donde de verdad mandas. Cuídala.","La paciencia no es esperar: es mantener la calma mientras trabajas.","Cada grupo es una oportunidad de practicar la paciencia.","No gastes la mañana temiendo la tarde.","Lo difícil de hoy será tu experiencia de mañana.","Haz lo correcto aunque nadie lo aplauda.","Menos opinar sobre lo que pasa, más actuar con lo que tienes.","Este día no volverá. Úsalo con intención.","La disciplina es hacerlo bien incluso cuando no hay ganas.","No eliges el clima, pero sí tu actitud.","Un error es un maestro con prisa: escúchalo y sigue.","Ser amable no cuesta nada y rinde muchísimo.","Cuando algo te moleste, pregúntate si está en tus manos.","Trabaja con calma, como quien tiene todo el tiempo y no pierde ninguno.","La gratitud convierte lo común en suficiente.","Haz tu parte y deja el resultado en paz.","Puedes ser mejor que ayer sin competir con nadie.","No te midas por lo que logras hoy, sino por cómo lo intentas.","La tranquilidad se entrena, como un músculo.","Quien se prepara para lo difícil lo encuentra más ligero.","Respira. Lo que viene lo puedes manejar.","Los pequeños hábitos de hoy son el carácter de mañana."];
+const di=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/864e5);
+$("ph").textContent=PH[((di%PH.length)+PH.length)%PH.length];
+let hid=false;try{hid=localStorage.getItem("pet")==="0"}catch(e){}
+function setPet(){$("pet").classList.toggle("hide",hid);try{localStorage.setItem("pet",hid?"0":"1")}catch(e){}}
+$("wm").onclick=()=>{hid=!hid;setPet()};$("hd").onclick=()=>{hid=true;setPet()};
+const WC=["#6cc04a","#4a86c7","#8a5cd6","#e83be0","#f5951d","#f2c230","#e2231a","#2bb5a5","#8a8a85"];
+let wc=WC[0];try{const c=localStorage.getItem("wc");if(/^#[0-9a-f]{6}$/i.test(c))wc=c}catch(e){}
+function setWc(c){wc=c;$("pet").style.setProperty("--wb",c);try{localStorage.setItem("wc",c)}catch(e){}$("pal").querySelectorAll(".sw").forEach(b=>b.classList.toggle("on",b.dataset.c===c));$("cp").value=c}
+WC.forEach(c=>{const b=document.createElement("button");b.className="sw";b.dataset.c=c;b.style.background=c;b.setAttribute("aria-label","Color "+c);b.onclick=()=>setWc(c);$("pal").append(b)});
+const cp=document.createElement("input");cp.type="color";cp.id="cp";cp.title="Color personalizado";cp.oninput=()=>setWc(cp.value);$("pal").append(cp);
+setWc(wc);
+setPet();
 setAn();head();draw();
 </script></body></html>
