@@ -107,7 +107,14 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 #set .lab{margin:22px 0 10px}#set .pal{display:flex}#mctl{margin-top:10px}
 .sh{display:flex;justify-content:space-between;align-items:center}
 #wcv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:8}
-#wbtn{height:44px;padding:0 16px;font-weight:600}#wbtn.on{background:var(--tx);color:var(--bg)}
+#wbtn{height:44px;padding:0 16px;font-weight:600}
+header,.hb{flex-wrap:wrap}
+#gd{position:fixed;inset:0;z-index:40;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(4px)}#gd.on{display:flex}
+#gd .box{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:22px 22px 0 0;box-shadow:var(--sh);padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));width:100%;max-width:640px;max-height:85vh;overflow:auto;animation:up .35s cubic-bezier(.2,.7,.2,1)}
+.gt{border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin:10px 0;background:var(--bg)}
+.gt h4{margin:0 0 6px;display:flex;align-items:center;gap:8px;font-size:15px}
+.gt h4 i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.gt p{margin:3px 0;font-size:14px}#wbtn.on{background:var(--tx);color:var(--bg)}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 :root[data-hc="1"]{--bg:#fff;--card:#fff;--tx:#000;--mut:#222;--ln:#000;--sh:none}
 :root[data-hc="1"][data-theme="dark"]{--bg:#000;--card:#000;--tx:#fff;--mut:#e6e6e6;--ln:#fff}
@@ -125,7 +132,7 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(226,35,26,0)}50%{box-shadow:0 0 0 7px rgba(226,35,26,.18)}}
 @media (prefers-reduced-motion:reduce){*,*::after,*::before{animation:none!important;transition:none!important}}
 </style></head><body><main>
-<header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button class="t" id="wbtn" aria-pressed="false">worm</button><button id="gear" aria-label="Ajustes" title="Ajustes">⚙️</button></div></header>
+<header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button class="t" id="gbtn" style="height:44px;font-weight:600">Guardias</button><button class="t" id="wbtn" aria-pressed="false">worm</button><button id="gear" aria-label="Ajustes" title="Ajustes">⚙️</button></div></header>
 <div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg class="mc on" data-k="worm" viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg><svg class='mc' data-k='cat' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><path style='fill:none;stroke:var(--ws);stroke-width:11;stroke-linecap:round' d='M92 52Q112 50 108 28'/><path style='fill:none;stroke:var(--wb);stroke-width:7;stroke-linecap:round' d='M92 52Q112 50 108 28'/><ellipse style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='66' cy='48' rx='30' ry='17'/><path style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' d='M17 28L20 5L35 19ZM53 28L50 5L35 19Z'/><circle style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' cx='35' cy='38' r='19'/><circle cx='28' cy='35' r='4.5' fill='#fff'/><circle cx='42' cy='35' r='4.5' fill='#fff'/><circle cx='27' cy='36' r='2'/><circle cx='41' cy='36' r='2'/><path d='M31 45Q35 49 39 45' fill='none' stroke='#1d1d1b' stroke-width='2' stroke-linecap='round'/></g></svg><svg class='mc' data-k='bird' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><ellipse style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='28' cy='46' rx='8' ry='14'/><ellipse style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='84' cy='46' rx='8' ry='14'/><circle style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='56' cy='40' r='26'/><ellipse style='fill:var(--wh)' cx='56' cy='54' rx='15' ry='10'/><circle cx='46' cy='32' r='5' fill='#fff'/><circle cx='66' cy='32' r='5' fill='#fff'/><circle cx='46' cy='33' r='2'/><circle cx='66' cy='33' r='2'/><path d='M50 39H62L56 47Z' fill='#f5951d' stroke='#b86a0a' stroke-width='1.5' stroke-linejoin='round'/><path d='M48 66v4M64 66v4' stroke='#f5951d' stroke-width='3' stroke-linecap='round'/></g></svg><svg class='mc' data-k='robot' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><rect style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' x='40' y='52' width='40' height='15' rx='6'/><rect style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' x='30' y='14' width='60' height='38' rx='10'/><circle cx='46' cy='30' r='6' fill='#fff'/><circle cx='74' cy='30' r='6' fill='#fff'/><circle cx='46' cy='31' r='2'/><circle cx='74' cy='31' r='2'/><path d='M48 42H72' stroke='#1d1d1b' stroke-width='2.5' stroke-linecap='round'/><path d='M60 14V7' style='stroke:var(--ws)' stroke-width='2.5'/><ellipse cx='60' cy='5' rx='4' ry='4' style='fill:var(--c2,#f5951d)'/></g></svg><svg class='mc' data-k='ghost' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><path style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' d='M32 62V30Q32 6 60 6Q88 6 88 30V62L78 54L69 62L60 54L51 62L42 54Z'/><circle cx='50' cy='28' r='5' fill='#fff' stroke='#1d1d1b' stroke-width='.8'/><circle cx='70' cy='28' r='5' fill='#fff' stroke='#1d1d1b' stroke-width='.8'/><circle cx='50' cy='29' r='2'/><circle cx='70' cy='29' r='2'/><ellipse cx='60' cy='41' rx='5' ry='6' fill='#1d1d1b'/></g></svg><svg id='ac' class='on' viewBox='0 0 120 70' aria-hidden='true'></svg></button><div class="bub"><p class="lab" id="lb" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="mp"></div><div class="pal" id="pal"></div><div class="pal" id="pre" style="margin-top:8px"></div><div id="pn"></div><button id="pk" aria-label="Colores" title="Colores">🎨</button><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
 <div class="sec"><p class="lab">Materia</p><div class="row" id="subs"></div></div>
 <div class="sec"><p class="lab">Día</p><div class="seg" id="days"></div></div>
@@ -147,6 +154,7 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 <p class="lab">Mascota</p><button class="t" id="pt">Ocultar mascota</button><div id="mctl"></div>
 <p class="lab">App</p><button class="t" id="inst" style="display:none">Instalar app</button><p class="mut">Para instalarla: en Chrome o Edge usa el ícono de instalar de la barra de direcciones; en iPhone, Compartir → Añadir a pantalla de inicio.</p>
 </div></div>
+<div id="gd"><div class="box"><div class="sh"><b>Guardias de todos</b><button class="t" id="gx">Cerrar</button></div><div class="seg" id="gdd" style="margin-top:14px"></div><div id="gdl"></div></div></div>
 <script>
 const S=["Matemáticas","Humanidades","StudyHall","CODE","Ajedrez","Inglés","Lecto"];
 const COL={"Matemáticas":["#4a86c7","#fff"],"Humanidades":["#ffe94a","#1d1d1b"],"StudyHall":["#7b2a4a","#fff"],"CODE":["#f5951d","#1d1d1b"],"Ajedrez":["#e83be0","#fff"],"Inglés":["#e2231a","#fff"],"Lecto":["#2e8b2e","#fff"]};
@@ -248,7 +256,8 @@ function setAn(){$("tl").dataset.a=AN[ai][0];$("an").textContent="✨ "+AN[ai][1
 $("an").onclick=()=>{ai=(ai+1)%AN.length;try{localStorage.setItem("an",ai)}catch(e){}setAn();draw()};
 const PH=["Hoy no controlas todo, pero sí cómo respondes. Empieza por ahí.","Haz bien lo de hoy; el mañana te lo agradecerá.","Lo que te estorba en el camino puede convertirse en el camino.","No te quejes de la lluvia: ponte el abrigo y sigue.","La calma también es una forma de fuerza.","Sé como la roca: la ola rompe y ella sigue en pie.","Un buen día se construye una tarea a la vez.","Si algo no depende de ti, suéltalo. Si depende, hazlo.","Empieza ahora; el momento perfecto no llega solo.","Tu mente es el lugar donde de verdad mandas. Cuídala.","La paciencia no es esperar: es mantener la calma mientras trabajas.","Cada grupo es una oportunidad de practicar la paciencia.","No gastes la mañana temiendo la tarde.","Lo difícil de hoy será tu experiencia de mañana.","Haz lo correcto aunque nadie lo aplauda.","Menos opinar sobre lo que pasa, más actuar con lo que tienes.","Este día no volverá. Úsalo con intención.","La disciplina es hacerlo bien incluso cuando no hay ganas.","No eliges el clima, pero sí tu actitud.","Un error es un maestro con prisa: escúchalo y sigue.","Ser amable no cuesta nada y rinde muchísimo.","Cuando algo te moleste, pregúntate si está en tus manos.","Trabaja con calma, como quien tiene todo el tiempo y no pierde ninguno.","La gratitud convierte lo común en suficiente.","Haz tu parte y deja el resultado en paz.","Puedes ser mejor que ayer sin competir con nadie.","No te midas por lo que logras hoy, sino por cómo lo intentas.","La tranquilidad se entrena, como un músculo.","Quien se prepara para lo difícil lo encuentra más ligero.","Respira. Lo que viene lo puedes manejar.","Los pequeños hábitos de hoy son el carácter de mañana."];
 const di=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/864e5);
-let daily=PH[((di%PH.length)+PH.length)%PH.length];$("ph").textContent=daily;
+const QS=["No nos afectan las cosas, sino la opinión que tenemos de ellas. — Epicteto","Hay cosas que dependen de nosotros y otras que no. Ocúpate de las primeras. — Epicteto","No pidas que las cosas ocurran como quieres; quiere que ocurran como ocurren, y serás feliz. — Epicteto","Ninguna cosa grande se crea de repente. — Epicteto","Primero decide quién quieres ser; después haz lo que tengas que hacer. — Epicteto","Nadie es libre si no es dueño de sí mismo. — Epicteto","Lo que se interpone en el camino se convierte en el camino. — Marco Aurelio","Ya no discutas cómo es un buen hombre: sé uno. — Marco Aurelio","Haz cada acto como si fuera el último de tu vida. — Marco Aurelio","Si algo externo te angustia, no es la cosa, sino tu juicio sobre ella; y puedes cambiarlo ahora mismo. — Marco Aurelio","Cuando te cueste levantarte, recuerda que naciste para trabajar como persona. — Marco Aurelio","El mejor modo de vengarte es no parecerte a quien te hizo daño. — Marco Aurelio","Siempre puedes retirarte a ti mismo: tu mente es tu mejor refugio. — Marco Aurelio","No es que tengamos poco tiempo, sino que perdemos mucho. — Séneca","Sufrimos más en la imaginación que en la realidad. — Séneca","Mientras aplazamos la vida, ella se va pasando. — Séneca","Ningún viento es favorable para quien no sabe a qué puerto va. — Séneca","Como el cuerpo se fortalece con el esfuerzo, la mente se fortalece con las dificultades. — Séneca","Desgraciado quien nunca conoció la adversidad: no se ha puesto a prueba. — Séneca","Una vida sin examen no merece ser vivida. — Sócrates","La primera y mejor de las victorias es vencerse a uno mismo. — Platón","El viaje de mil millas empieza con un solo paso. — Lao-Tsé","Nadie se baña dos veces en el mismo río. — Heráclito","La felicidad es vivir con buen fluir. — Zenón de Citio"];
+let daily=QS[((di%QS.length)+QS.length)%QS.length];$("ph").textContent=daily;
 let GMo="";const MP={rest:["Descanso","Respira hondo y toma agua. Te lo ganaste."],free:["Hora libre","Aprovecha para estirarte un poco."],done:["¡Buen trabajo!","Terminaste tus clases. Cierra el día con calma."]};
 function ctx(m){if(MP[m])return MP[m];const h=new Date().getHours(),g=h<12?"Buenos días":h<19?"Buenas tardes":"Buenas noches";return[g+" · frase del día",(new Date().getDay()===5?"¡Ya es viernes! ":"")+daily]}
 function speak(h,m){const p=$("pet");if(h){$("ph").innerHTML=h;$("lb").textContent="Aviso";p.classList.add("talk")}else{const o=ctx(m);$("ph").textContent=o[1];$("lb").textContent=o[0];p.classList.remove("talk")}}
@@ -312,17 +321,17 @@ s-=r.h;if(s<r.w)return{x:r.r-s,y:r.b,nx:0,ny:1,tx:-1,ty:0};
 s-=r.w;return{x:r.l,y:r.b-s,nx:-1,ny:0,tx:0,ty:-1}}
 function coll(){RL=[];document.querySelectorAll(".card,.bub,#alert,.seg,.chip,.t,.ev,#gear").forEach(el=>{const b=el.getBoundingClientRect();if(b.width>30&&b.height>10&&b.bottom>0&&b.top<H&&b.right>0&&b.left<W)RL.push({el,l:b.left,t:b.top,r:b.right,b:b.bottom,w:b.width,h:b.height})})}
 function rect(w){if(!w.el)return{l:0,t:H-1,r:W,b:H+30,w:W,h:31};const b=w.el.getBoundingClientRect();return{l:b.left,t:b.top,r:b.right,b:b.bottom,w:b.width,h:b.height}}
-function mkw(i){const x=30+Math.random()*(W-60);return{mode:"wait",delay:i*.4,x,y:-8,vx:(Math.random()-.5)*220,vy:0,pts:Array.from({length:N},()=>({x,y:-8})),age:0,life:20+Math.random()*8,el:null,sT0:0,dir:1,u:0,spd:1}}
+function mkw(i){const x=30+Math.random()*(W-60);return{mode:"wait",delay:i*.4,x,y:-8,vx:(Math.random()-.5)*220,vy:0,pts:Array.from({length:N},()=>({x,y:-8})),age:0,life:20+Math.random()*8,el:null,sT0:0,dir:1,u:0,spd:1,sc:1,c:"#2e8b2e"}}
 function land(w,r,k){const rr=r||{l:0,t:H-1,r:W,b:H+30,w:W,h:31};let s,dir;
 if(k==="t"||k==="f"){s=w.x-rr.l;dir=w.vx>=0?1:-1}
 else if(k==="l"){s=2*rr.w+rr.h+(rr.b-w.y);dir=1}else{s=rr.w+(w.y-rr.t);dir=-1}
-w.mode="crawl";w.el=r?r.el:null;w.dir=dir;w.sT0=s-dir*LMIN;w.u=0;w.spd=1+Math.min(1.5,Math.abs(w.vx)/150);w.vx=w.vy=0}
+w.mode="crawl";w.el=r?r.el:null;w.dir=dir;w.sT0=s-dir*LMIN*w.sc;w.u=0;w.spd=1+Math.min(1.5,Math.abs(w.vx)/150);w.vx=w.vy=0}
 function fall(w,dt){const px=w.x,py=w.y,dx=w.x-mx,dy=w.y-my,d=Math.hypot(dx,dy);
 if(d<R&&d>0){const f=(1-d/R)*1800*dt;w.vx+=dx/d*f;w.vy+=dy/d*f*.6}
 w.vy+=G*dt;w.x+=w.vx*dt;w.y+=w.vy*dt;
 if(w.x<2){w.x=2;w.vx=Math.abs(w.vx)*.5}else if(w.x>W-2){w.x=W-2;w.vx=-Math.abs(w.vx)*.5}
 const h=w.pts[N-1];h.x=w.x;h.y=w.y;
-for(let i=N-2;i>=0;i--){const a=w.pts[i],b=w.pts[i+1],ex=a.x-b.x,ey=a.y-b.y,l=Math.hypot(ex,ey)||1;if(l>LS){a.x=b.x+ex/l*LS;a.y=b.y+ey/l*LS}}
+for(let i=N-2;i>=0;i--){const a=w.pts[i],b=w.pts[i+1],ex=a.x-b.x,ey=a.y-b.y,l=Math.hypot(ex,ey)||1;const q=LS*w.sc;if(l>q){a.x=b.x+ex/l*q;a.y=b.y+ey/l*q}}
 for(const r of RL){if(w.vy>0&&w.x>=r.l&&w.x<=r.r&&py<r.t&&w.y>=r.t)return land(w,r,"t");
 if(w.y>r.t&&w.y<r.b){if(px<r.l&&w.x>=r.l)return land(w,r,"l");if(px>r.r&&w.x<=r.r)return land(w,r,"r")}}
 if(w.y>=H-1){w.y=H-1;land(w,null,"f")}}
@@ -331,32 +340,42 @@ function away(w,ax,ay){const h=w.pts[N-1],n=w.hn||{nx:0,ny:-1};let vx=ax*260,vy=
 function crawl(w,dt){const r=rect(w);
 if(w.el&&(!w.el.isConnected||r.w<30||r.h<10||r.b<0||r.t>H)){const h=w.pts[N-1];w.mode="fall";w.x=h.x;w.y=h.y;w.vx=w.vy=0;w.el=null;return}
 w.u+=dt*w.spd/CY;w.spd+=(1-w.spd)*dt*1.5;
-const d=w.dir,P=2*(r.w+r.h);
-if(w.u>=1){w.u-=1;w.sT0+=d*(LMAX-LMIN);
-if(w.el){const sh=w.sT0+d*LMIN;let cs=null;
+const d=w.dir,P=2*(r.w+r.h),lm=LMIN*w.sc,lx=LMAX*w.sc;
+if(w.u>=1){w.u-=1;w.sT0+=d*(lx-lm);
+if(w.el){const sh=w.sT0+d*lm;let cs=null;
 for(const c of[0,r.w,r.w+r.h,2*r.w+r.h]){const df=(((sh-c+P/2)%P)+P)%P-P/2;if(Math.abs(df)<25)cs=c}
 if(cs!==null&&Math.random()<.5){const a=pp(r,cs+d*5),b=pp(r,cs-d*5);w.mode="fall";w.x=a.x;w.y=a.y;w.vx=b.tx*d*150;w.vy=b.ty*d*150;w.el=null;return}}}
 // ciclo: extender (cabeza avanza, cola anclada) → anclar cabeza → arquear (cola avanza)
 const u=w.u;let sT,sH,ar;
-if(u<.45){const e=ez(u/.45);sT=w.sT0;sH=sT+d*(LMIN+(LMAX-LMIN)*e);ar=1-e}
-else if(u<.55){sT=w.sT0;sH=sT+d*LMAX;ar=0}
-else{const e=ez((u-.55)/.45);sT=w.sT0+d*(LMAX-LMIN)*e;sH=w.sT0+d*LMAX;ar=e}
+if(u<.45){const e=ez(u/.45);sT=w.sT0;sH=sT+d*(lm+(lx-lm)*e);ar=1-e}
+else if(u<.55){sT=w.sT0;sH=sT+d*lx;ar=0}
+else{const e=ez((u-.55)/.45);sT=w.sT0+d*(lx-lm)*e;sH=w.sT0+d*lx;ar=e}
 if(!w.el&&((d>0&&sH>r.w-3)||(d<0&&sH<3))){flip(w,sH);return}
 w.hn=pp(r,sH);
-for(let i=0;i<N;i++){const t=i/(N-1),p=pp(r,sT+(sH-sT)*t),a=Math.sin(Math.PI*t)*14*ar;w.pts[i].x=p.x+p.nx*a;w.pts[i].y=p.y+p.ny*a}
+for(let i=0;i<N;i++){const t=i/(N-1),p=pp(r,sT+(sH-sT)*t),a=Math.sin(Math.PI*t)*14*w.sc*ar;w.pts[i].x=p.x+p.nx*a;w.pts[i].y=p.y+p.ny*a}
 const m=w.pts[N>>1],dx=m.x-mx,dy=m.y-my,dd=Math.hypot(dx,dy);
 if(dd<R&&dd>0){const h=w.pts[N-1],t0=w.pts[0];if((h.x-t0.x)*dx+(h.y-t0.y)*dy<0)flip(w,sH);w.spd=2.4;if(dd<R*.4&&Math.random()<.05)away(w,dx/dd,dy/dd)}}
 function loop(t){const dt=Math.min(.05,(t-last)/1000||.016);last=t;coll();cx.clearRect(0,0,W,H);
 const col=getComputedStyle(document.documentElement).getPropertyValue("--tx").trim()||"#000";
 for(const w of ws){if(w.mode==="wait"){w.delay-=dt;if(w.delay>0)continue;w.mode="fall"}
 w.age+=dt;(w.mode==="fall"?fall:crawl)(w,dt);
-cx.globalAlpha=Math.max(0,Math.min(1,w.age/.6,(w.life-w.age)/4));cx.strokeStyle=col;cx.lineWidth=1;cx.beginPath();
+cx.globalAlpha=Math.max(0,Math.min(1,w.age/.6,(w.life-w.age)/4));cx.strokeStyle=w.c;cx.lineWidth=1;cx.beginPath();
 w.pts.forEach((p,i)=>i?cx.lineTo(p.x,p.y):cx.moveTo(p.x,p.y));cx.stroke()}
 cx.globalAlpha=1;ws=ws.filter(w=>w.age<w.life);
 if(ws.length)raf=requestAnimationFrame(loop);else{cx.clearRect(0,0,W,H);raf=0;btn.classList.remove("on");btn.setAttribute("aria-pressed","false")}}
+const WCOL=["#e2231a","#2e8b2e","#4a86c7","#e83be0","#f5951d","#8a5cd6","#2bb5a5"];
 btn.onclick=()=>{if(ws.length){ws=[];cancelAnimationFrame(raf);raf=0;cx.clearRect(0,0,W,H);btn.classList.remove("on");btn.setAttribute("aria-pressed","false");return}
-for(let i=0;i<5;i++)ws.push(mkw(i));btn.classList.add("on");btn.setAttribute("aria-pressed","true");last=performance.now();raf=requestAnimationFrame(loop)};
+const cl=WCOL.slice().sort(()=>Math.random()-.5),sz=[.6,.8,1,1.25,1.5].sort(()=>Math.random()-.5);
+const n=1+Math.floor(Math.random()*5);for(let i=0;i<n;i++){const w=mkw(i);w.c=cl[i];w.sc=sz[i];ws.push(w)}btn.classList.add("on");btn.setAttribute("aria-pressed","true");last=performance.now();raf=requestAnimationFrame(loop)};
 })();
+let gdDay=day;
+function gdraw(){$("gdd").querySelectorAll(".day").forEach((b,i)=>b.classList.toggle("on",i===gdDay));
+$("gdl").innerHTML=S.map(sb=>{const ev=events(gdDay,sb).filter(x=>x.role);
+return "<div class='gt'><h4><i style='background:"+COL[sb][0]+"'></i>"+T[sb]+" · "+sb+(sb===sub?" · tú":"")+"</h4>"+(ev.length?ev.map(x=>"<p><b>"+x.n+" "+fm(x.s)+"–"+fm(x.e)+":</b> "+x.role+"</p>").join(""):"<p class='mut'>Sin guardias</p>")+"</div>"}).join("")}
+DN.forEach((n,i)=>{const b=document.createElement("button");b.className="day";b.textContent=n;b.onclick=()=>{gdDay=i;gdraw()};$("gdd").append(b)});
+$("gbtn").onclick=()=>{gdDay=day;gdraw();$("gd").classList.add("on")};
+const gx=()=>$("gd").classList.remove("on");$("gx").onclick=gx;$("gd").onclick=e=>{if(e.target===$("gd"))gx()};
+addEventListener("keydown",e=>{if(e.key==="Escape")gx()});
 let dp;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;$("inst").style.display=""});
 $("inst").onclick=()=>{if(dp){dp.prompt();dp=null;$("inst").style.display="none"}};
 try{if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
