@@ -2,6 +2,7 @@
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mi horario · The Element Palomar</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#6cc04a"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light;--bg:#f4f2ee;--card:#fffdf9;--tx:#1f1e1b;--mut:#78756d;--ln:#e6e2d9;--now:#e2231a;--warn:#ffe94a;--sh:0 1px 2px rgba(30,25,10,.05),0 8px 24px rgba(30,25,10,.06)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#121211;--card:#1c1c1a;--tx:#efede6;--mut:#a3a099;--ln:#2d2d2a;--now:#ff5a4f;--sh:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35)}}
@@ -99,6 +100,22 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 #pet.talk .pal,#pet.talk #hd,#pet.talk .lab{color:#1d1d1b}#pet.talk .pal,#pet.talk #hd,#pet.talk #pk{display:none}
 #pet.talk .sg{animation-name:hop;animation-duration:.7s}
 @keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+#wm{position:relative}
+#gear{background:var(--card);border:1px solid var(--ln);border-radius:12px;width:44px;height:44px;font-size:19px;cursor:pointer;box-shadow:var(--sh);transition:transform .4s}#gear:hover{transform:rotate(45deg)}
+#set{position:fixed;inset:0;z-index:40;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(4px)}#set.on{display:flex}
+#set .box{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:22px 22px 0 0;box-shadow:var(--sh);padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));width:100%;max-width:640px;max-height:85vh;overflow:auto;animation:up .35s cubic-bezier(.2,.7,.2,1)}
+#set .lab{margin:22px 0 10px}#set .pal{display:flex}#mctl{margin-top:10px}
+.sh{display:flex;justify-content:space-between;align-items:center}
+#wcv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:8}
+#wbtn{height:44px;padding:0 16px;font-weight:600}#wbtn.on{background:var(--tx);color:var(--bg)}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+:root[data-hc="1"]{--bg:#fff;--card:#fff;--tx:#000;--mut:#222;--ln:#000;--sh:none}
+:root[data-hc="1"][data-theme="dark"]{--bg:#000;--card:#000;--tx:#fff;--mut:#e6e6e6;--ln:#fff}
+#wm svg:not(.on){display:none}
+#ac{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+#wm svg.mc.act{animation:boing .6s ease;transform-origin:50% 90%}
+@keyframes boing{0%{transform:scale(1)}30%{transform:scale(1.14,.86)}60%{transform:scale(.94,1.1)}100%{transform:none}}
+.mb{background:var(--bg);border:2px solid transparent;border-radius:10px;width:36px;height:32px;cursor:pointer;font-size:17px;padding:0;transition:transform .15s}.mb:hover{transform:scale(1.1)}.mb.on{border-color:var(--tx)}
 #gate .box{background:var(--card);border:1px solid var(--ln);border-radius:20px;box-shadow:var(--sh);padding:24px;width:100%;max-width:340px;animation:rise .35s cubic-bezier(.2,.7,.2,1)}
 #gate input{width:100%;margin:14px 0 6px;padding:12px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font-size:16px}
 #gate .er{color:var(--now);font-size:13px;min-height:18px}
@@ -108,8 +125,8 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(226,35,26,0)}50%{box-shadow:0 0 0 7px rgba(226,35,26,.18)}}
 @media (prefers-reduced-motion:reduce){*,*::after,*::before{animation:none!important;transition:none!important}}
 </style></head><body><main>
-<header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button id="an" aria-label="Cambiar animación">✨ Subir</button><button id="th" aria-label="Cambiar tema">🌙</button></div></header>
-<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg></button><div class="bub"><p class="lab" id="lb" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="pal"></div><div class="pal" id="pre" style="margin-top:8px"></div><div id="pn"></div><button id="pk" aria-label="Colores" title="Colores">🎨</button><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
+<header><div><h1>Mi horario</h1><div class="mut" id="wk"></div></div><div class="hb"><button class="t" id="wbtn" aria-pressed="false">worm</button><button id="gear" aria-label="Ajustes" title="Ajustes">⚙️</button></div></header>
+<div id="pet"><button id="wm" title="Mostrar u ocultar mascota" aria-label="Mostrar u ocultar mascota"><svg class="mc on" data-k="worm" viewBox="0 0 120 70" aria-hidden="true"><g style="fill:var(--wb);stroke:var(--ws)" stroke-width="2.5"><circle class="sg" style="--d:0s" cx="104" cy="48" r="8"/><circle class="sg" style="--d:.15s" cx="91" cy="42" r="10"/><circle class="sg" style="--d:.3s" cx="76" cy="48" r="11"/><circle class="sg" style="--d:.45s" cx="61" cy="42" r="12"/><circle class="sg" style="--d:.6s" cx="46" cy="48" r="13"/></g><g class="sg" style="--d:.75s"><circle cx="28" cy="40" r="17" style="fill:var(--wh);stroke:var(--ws)" stroke-width="2.5"/><circle cx="22" cy="36" r="4.5" fill="#fff"/><circle cx="34" cy="36" r="4.5" fill="#fff"/><circle cx="21" cy="37" r="2" fill="#1d1d1b"/><circle cx="33" cy="37" r="2" fill="#1d1d1b"/><path d="M21 46 Q28 52 36 46" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/></g></svg><svg class='mc' data-k='cat' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><path style='fill:none;stroke:var(--ws);stroke-width:11;stroke-linecap:round' d='M92 52Q112 50 108 28'/><path style='fill:none;stroke:var(--wb);stroke-width:7;stroke-linecap:round' d='M92 52Q112 50 108 28'/><ellipse style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='66' cy='48' rx='30' ry='17'/><path style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' d='M17 28L20 5L35 19ZM53 28L50 5L35 19Z'/><circle style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' cx='35' cy='38' r='19'/><circle cx='28' cy='35' r='4.5' fill='#fff'/><circle cx='42' cy='35' r='4.5' fill='#fff'/><circle cx='27' cy='36' r='2'/><circle cx='41' cy='36' r='2'/><path d='M31 45Q35 49 39 45' fill='none' stroke='#1d1d1b' stroke-width='2' stroke-linecap='round'/></g></svg><svg class='mc' data-k='bird' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><ellipse style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='28' cy='46' rx='8' ry='14'/><ellipse style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='84' cy='46' rx='8' ry='14'/><circle style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' cx='56' cy='40' r='26'/><ellipse style='fill:var(--wh)' cx='56' cy='54' rx='15' ry='10'/><circle cx='46' cy='32' r='5' fill='#fff'/><circle cx='66' cy='32' r='5' fill='#fff'/><circle cx='46' cy='33' r='2'/><circle cx='66' cy='33' r='2'/><path d='M50 39H62L56 47Z' fill='#f5951d' stroke='#b86a0a' stroke-width='1.5' stroke-linejoin='round'/><path d='M48 66v4M64 66v4' stroke='#f5951d' stroke-width='3' stroke-linecap='round'/></g></svg><svg class='mc' data-k='robot' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><rect style='fill:var(--wb);stroke:var(--ws)' stroke-width='2.5' x='40' y='52' width='40' height='15' rx='6'/><rect style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' x='30' y='14' width='60' height='38' rx='10'/><circle cx='46' cy='30' r='6' fill='#fff'/><circle cx='74' cy='30' r='6' fill='#fff'/><circle cx='46' cy='31' r='2'/><circle cx='74' cy='31' r='2'/><path d='M48 42H72' stroke='#1d1d1b' stroke-width='2.5' stroke-linecap='round'/><path d='M60 14V7' style='stroke:var(--ws)' stroke-width='2.5'/><ellipse cx='60' cy='5' rx='4' ry='4' style='fill:var(--c2,#f5951d)'/></g></svg><svg class='mc' data-k='ghost' viewBox='0 0 120 70' aria-hidden='true'><g></g><g class='sg' style='--d:0s'><path style='fill:var(--wh);stroke:var(--ws)' stroke-width='2.5' d='M32 62V30Q32 6 60 6Q88 6 88 30V62L78 54L69 62L60 54L51 62L42 54Z'/><circle cx='50' cy='28' r='5' fill='#fff' stroke='#1d1d1b' stroke-width='.8'/><circle cx='70' cy='28' r='5' fill='#fff' stroke='#1d1d1b' stroke-width='.8'/><circle cx='50' cy='29' r='2'/><circle cx='70' cy='29' r='2'/><ellipse cx='60' cy='41' rx='5' ry='6' fill='#1d1d1b'/></g></svg><svg id='ac' class='on' viewBox='0 0 120 70' aria-hidden='true'></svg></button><div class="bub"><p class="lab" id="lb" style="margin:0 0 4px">Frase del día</p><div id="ph"></div><div class="pal" id="mp"></div><div class="pal" id="pal"></div><div class="pal" id="pre" style="margin-top:8px"></div><div id="pn"></div><button id="pk" aria-label="Colores" title="Colores">🎨</button><button id="hd" aria-label="Ocultar mascota">✕</button></div></div>
 <div class="sec"><p class="lab">Materia</p><div class="row" id="subs"></div></div>
 <div class="sec"><p class="lab">Día</p><div class="seg" id="days"></div></div>
 <div id="alert"></div>
@@ -123,6 +140,13 @@ input[type=time]{background:var(--card);color:var(--tx);border:1px solid var(--l
 <p id="msg"></p>
 <div id="gate"><div class="box"><b>Contraseña requerida</b><div class="mut">Para cambiar el horario o los roles.</div><input id="pw" type="password" autocapitalize="characters" autocomplete="off" placeholder="Contraseña"><div class="er" id="er"></div><div class="bt"><button class="t" id="gc">Cancelar</button><button class="t" id="go">Entrar</button></div></div></div>
 </main>
+<div id="set"><div class="box"><div class="sh"><b>Ajustes</b><button class="t" id="sx">Cerrar</button></div>
+<p class="lab">Apariencia</p><div class="row"><button id="th" aria-label="Cambiar tema">🌙</button><button id="an" aria-label="Cambiar animación">✨ Subir</button></div>
+<p class="lab">Tamaño de letra</p><div class="seg" id="fsz"><button class="day">A</button><button class="day">A+</button><button class="day">A++</button></div>
+<p class="lab">Accesibilidad</p><button class="t" id="hc">Alto contraste: no</button>
+<p class="lab">Mascota</p><button class="t" id="pt">Ocultar mascota</button><div id="mctl"></div>
+<p class="lab">App</p><button class="t" id="inst" style="display:none">Instalar app</button><p class="mut">Para instalarla: en Chrome o Edge usa el ícono de instalar de la barra de direcciones; en iPhone, Compartir → Añadir a pantalla de inicio.</p>
+</div></div>
 <script>
 const S=["Matemáticas","Humanidades","StudyHall","CODE","Ajedrez","Inglés","Lecto"];
 const COL={"Matemáticas":["#4a86c7","#fff"],"Humanidades":["#ffe94a","#1d1d1b"],"StudyHall":["#7b2a4a","#fff"],"CODE":["#f5951d","#1d1d1b"],"Ajedrez":["#e83be0","#fff"],"Inglés":["#e2231a","#fff"],"Lecto":["#2e8b2e","#fff"]};
@@ -176,15 +200,15 @@ let last="";
 function tick(){const n=nowMin(),ev=events(day,sub),nl=$("nowl");if(!nl)return;
 const real=$("sim").value||new Date().getDay()-1===day;
 nl.style.display=real&&n>=T0&&n<=930?"block":"none";nl.style.top=(n-T0)*PX+"px";nl.firstChild.textContent=fm(Math.floor(n));
-let cls="",h="",pre="";
+let cls="",h="",pre="",mom="";
 if(!real)h="Mostrando "+DN[day]+". La línea de “ahora” aparece solo el día de hoy.";
 else{const cur=ev.find(x=>n>=x.s&&n<x.e),nx=ev.find(x=>x.s>n&&x.s-n<=5&&x.k!=="free"&&x.k!=="class");
-const cl=ev.filter(x=>x.k==="class"),lc=cl[cl.length-1],ce=cl.find(x=>x.e>n&&x.e-n<=(x===lc?10:5));
+mom=cur?cur.k:(ev.find(x=>x.s>n)?"":"done");const cl=ev.filter(x=>x.k==="class"),lc=cl[cl.length-1],ce=cl.find(x=>x.e>n&&x.e-n<=(x===lc?10:5));
 if(ce){cls="warn";const mn=Math.ceil(ce.e-n);pre=ce===lc?"<div>Comenzar limpieza · faltan "+mn+" min (termina "+fm(ce.e)+")</div><small>Última clase · "+ce.n+"</small>":"<div>En "+mn+" min termina la clase ("+fm(ce.e)+")</div><small>"+ce.n+"</small>"}
 if(nx){cls="warn";h="<div>En "+Math.ceil(nx.s-n)+" min: "+nx.n+" ("+fm(nx.s)+")"+(nx.role?" · Rol: "+nx.role:"")+"</div><small>"+(DESC[nx.role]||"")+"</small>"}
 else if(cur){h="<div><b>Ahora:</b> "+cur.n+" hasta "+fm(cur.e)+(cur.role?" · Rol: "+cur.role:"")+"</div>"}
 else{const f=ev.find(x=>x.s>n);h=f?"<div>Siguiente: "+f.n+" a las "+fm(f.s)+"</div>":"<div>Terminaste por hoy.</div>"}}
-h=pre+h;if(h!==last){last=h;const a=$("alert");if(cls==="warn"){speak(h);a.style.display="none"}else{speak(null);a.style.display="";a.className="pop";a.innerHTML=h}}}
+h=pre+h;if(h!==last){last=h;const a=$("alert");if(cls==="warn"){speak(h);a.style.display="none"}else{GMo=mom;speak(null,mom);a.style.display="";a.className="pop";a.innerHTML=h}}}
 $("sim").oninput=draw;setInterval(tick,15000);
 $("rs").onclick=async()=>{if(!await ask())return;sch=def();try{localStorage.removeItem("sch")}catch(e){}head();draw();$("msg").textContent="Horario restaurado."};
 function ask(){return new Promise(res=>{const g=$("gate"),i=$("pw");i.value="";$("er").textContent="";g.classList.add("on");i.focus();
@@ -225,10 +249,12 @@ $("an").onclick=()=>{ai=(ai+1)%AN.length;try{localStorage.setItem("an",ai)}catch
 const PH=["Hoy no controlas todo, pero sí cómo respondes. Empieza por ahí.","Haz bien lo de hoy; el mañana te lo agradecerá.","Lo que te estorba en el camino puede convertirse en el camino.","No te quejes de la lluvia: ponte el abrigo y sigue.","La calma también es una forma de fuerza.","Sé como la roca: la ola rompe y ella sigue en pie.","Un buen día se construye una tarea a la vez.","Si algo no depende de ti, suéltalo. Si depende, hazlo.","Empieza ahora; el momento perfecto no llega solo.","Tu mente es el lugar donde de verdad mandas. Cuídala.","La paciencia no es esperar: es mantener la calma mientras trabajas.","Cada grupo es una oportunidad de practicar la paciencia.","No gastes la mañana temiendo la tarde.","Lo difícil de hoy será tu experiencia de mañana.","Haz lo correcto aunque nadie lo aplauda.","Menos opinar sobre lo que pasa, más actuar con lo que tienes.","Este día no volverá. Úsalo con intención.","La disciplina es hacerlo bien incluso cuando no hay ganas.","No eliges el clima, pero sí tu actitud.","Un error es un maestro con prisa: escúchalo y sigue.","Ser amable no cuesta nada y rinde muchísimo.","Cuando algo te moleste, pregúntate si está en tus manos.","Trabaja con calma, como quien tiene todo el tiempo y no pierde ninguno.","La gratitud convierte lo común en suficiente.","Haz tu parte y deja el resultado en paz.","Puedes ser mejor que ayer sin competir con nadie.","No te midas por lo que logras hoy, sino por cómo lo intentas.","La tranquilidad se entrena, como un músculo.","Quien se prepara para lo difícil lo encuentra más ligero.","Respira. Lo que viene lo puedes manejar.","Los pequeños hábitos de hoy son el carácter de mañana."];
 const di=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/864e5);
 let daily=PH[((di%PH.length)+PH.length)%PH.length];$("ph").textContent=daily;
-function speak(h){const p=$("pet");if(h){$("ph").innerHTML=h;$("lb").textContent="Aviso";p.classList.add("talk")}else{$("ph").textContent=daily;$("lb").textContent="Frase del día";p.classList.remove("talk")}}
+let GMo="";const MP={rest:["Descanso","Respira hondo y toma agua. Te lo ganaste."],free:["Hora libre","Aprovecha para estirarte un poco."],done:["¡Buen trabajo!","Terminaste tus clases. Cierra el día con calma."]};
+function ctx(m){if(MP[m])return MP[m];const h=new Date().getHours(),g=h<12?"Buenos días":h<19?"Buenas tardes":"Buenas noches";return[g+" · frase del día",(new Date().getDay()===5?"¡Ya es viernes! ":"")+daily]}
+function speak(h,m){const p=$("pet");if(h){$("ph").innerHTML=h;$("lb").textContent="Aviso";p.classList.add("talk")}else{const o=ctx(m);$("ph").textContent=o[1];$("lb").textContent=o[0];p.classList.remove("talk")}}
 let hid=false;try{hid=localStorage.getItem("pet")==="0"}catch(e){}
-function setPet(){$("pet").classList.toggle("hide",hid);try{localStorage.setItem("pet",hid?"0":"1")}catch(e){}}
-$("wm").onclick=()=>{hid=!hid;setPet()};$("hd").onclick=()=>{hid=true;setPet()};
+function setPet(){$("pt").textContent=hid?"Mostrar mascota":"Ocultar mascota";$("pet").classList.toggle("hide",hid);try{localStorage.setItem("pet",hid?"0":"1")}catch(e){}}
+$("wm").onclick=()=>{if(hid){hid=false;setPet();return}say(RE[Math.random()*RE.length|0]);const s=$("wm").querySelector("svg.mc.on");s.classList.remove("act");void s.getBoundingClientRect();s.classList.add("act")};$("hd").onclick=()=>{hid=true;setPet()};
 const WC=["#6cc04a","#4a86c7","#8a5cd6","#e83be0","#f5951d","#f2c230","#e2231a","#2bb5a5","#8a8a85"];
 let wc=WC[0];try{const c=localStorage.getItem("wc");if(/^#[0-9a-f]{6}$/i.test(c))wc=c}catch(e){}
 const PRE=[{n:"Beetlejuice",c:["#f4f4f0","#111111","#f4f4f0","#111111","#f4f4f0"],h:"#8bd450",s:"var(--tx)",p:"#111111"},
@@ -246,7 +272,94 @@ WC.forEach(c=>{const b=document.createElement("button");b.className="sw";b.datas
 const cp=document.createElement("input");cp.type="color";cp.id="cp";cp.title="Color personalizado";cp.oninput=()=>setWc(cp.value);$("pal").append(cp);
 PRE.forEach((p,i)=>{const b=document.createElement("button");b.className="pre";b.title=p.n;b.setAttribute("aria-label","Estilo "+p.n);b.style.background="linear-gradient(90deg,"+p.c[0]+" 0 33%,"+p.c[1]+" 33% 66%,"+p.h+" 66%)";b.onclick=()=>setPre(i);$("pre").append(b)});
 const p0=pi;setWc(wc);if(p0>=0)setPre(p0);
-$("pk").onclick=()=>$("pet").classList.toggle("pick");
+const RE=["¡Hola! 👋","Me haces cosquillas 😄","¡Tú puedes con todo!","Un paso a la vez 🌱","¿Ya tomaste agua? 💧","Respira… y sigue 🍃","¡Buen día de trabajo!"];
+let rt;function say(t){const p=$("pet");if(p.classList.contains("talk"))return;$("ph").textContent=t;clearTimeout(rt);rt=setTimeout(()=>{if(!p.classList.contains("talk"))speak(null,GMo)},4000)}
+const MS=[["worm","🐛"],["cat","🐱"],["bird","🐦"],["robot","🤖"],["ghost","👻"]];
+const MD={worm:{h:[28,40,17],e:[22,34,36],d:".75s"},cat:{h:[35,38,19],e:[28,42,35],d:"0s"},bird:{h:[56,38,24],e:[46,66,32],d:"0s"},robot:{h:[60,32,30],e:[46,74,30],d:"0s"},ghost:{h:[60,28,24],e:[50,70,28],d:"0s"}};
+let mc="worm",ax=[0,0,0];try{const a=localStorage.getItem("mc");if(MD[a])mc=a;const b=JSON.parse(localStorage.getItem("ax"));if(Array.isArray(b)&&b.length===3)ax=b}catch(e){}
+function accs(){const d=MD[mc],[x,y,r]=d.h,[e1,e2,ey]=d.e;let s="";
+if(ax[2])s+=`<path d='M${x} ${y+r-1}l-11-7v14zM${x} ${y+r-1}l11-7v14z' fill='#e2231a'/><ellipse cx='${x}' cy='${y+r-1}' rx='3.5' ry='4' fill='#b81a12'/>`;
+if(ax[1])s+=`<ellipse cx='${e1}' cy='${ey}' rx='7.5' ry='6.5' fill='rgba(0,0,0,.35)' stroke='#111' stroke-width='2'/><ellipse cx='${e2}' cy='${ey}' rx='7.5' ry='6.5' fill='rgba(0,0,0,.35)' stroke='#111' stroke-width='2'/><path d='M${e1+7} ${ey}H${e2-7}' stroke='#111' stroke-width='2'/>`;
+if(ax[0])s+=`<rect x='${x-r}' y='${y-r+2}' width='${2*r}' height='5' rx='2.5' fill='#222'/><rect x='${x-r*.6}' y='${y-r-12}' width='${r*1.2}' height='15' rx='2' fill='#222'/><rect x='${x-r*.6}' y='${y-r-2}' width='${r*1.2}' height='4' fill='#e2231a'/>`;
+$("ac").innerHTML=`<g class='sg' style='--d:${d.d}'>${s}</g>`}
+function mk(){document.querySelectorAll("#wm svg.mc").forEach(s=>s.classList.toggle("on",s.dataset.k===mc));$("mp").querySelectorAll(".mb").forEach(b=>b.classList.toggle("on",b.dataset.k?b.dataset.k===mc:!!ax[+b.dataset.a]));accs()}
+MS.forEach(([k,e])=>{const b=document.createElement("button");b.className="mb";b.dataset.k=k;b.textContent=e;b.onclick=()=>{mc=k;try{localStorage.setItem("mc",k)}catch(x){}mk()};$("mp").append(b)});
+["🎩","🕶️","🎀"].forEach((e,i)=>{const b=document.createElement("button");b.className="mb";b.dataset.a=i;b.textContent=e;b.onclick=()=>{ax[i]^=1;try{localStorage.setItem("ax",JSON.stringify(ax))}catch(x){}mk()};$("mp").append(b)});
+mk();
+const st=$("set"),opn=()=>st.classList.add("on"),shut=()=>st.classList.remove("on");
+$("gear").onclick=opn;$("pk").onclick=opn;$("sx").onclick=shut;st.onclick=e=>{if(e.target===st)shut()};
+addEventListener("keydown",e=>{if(e.key==="Escape")shut()});
+["mp","pal","pre","pn"].forEach(i=>$("mctl").append($(i)));
+let fs=0,hc=0;try{fs=+localStorage.getItem("fs")||0;hc=localStorage.getItem("hc")==="1"?1:0}catch(e){}
+function applyUx(){document.querySelector("main").style.zoom=[1,1.15,1.3][fs]||1;document.documentElement.dataset.hc=hc?"1":"";document.querySelectorAll("#fsz .day").forEach((b,i)=>b.classList.toggle("on",i===fs));$("hc").textContent="Alto contraste: "+(hc?"sí":"no");try{localStorage.setItem("fs",fs);localStorage.setItem("hc",hc)}catch(e){}}
+document.querySelectorAll("#fsz .day").forEach((b,i)=>b.onclick=()=>{fs=i;applyUx()});
+$("hc").onclick=()=>{hc^=1;applyUx()};applyUx();
+$("pt").onclick=()=>{hid=!hid;setPet()};
+(function(){
+const cv=document.createElement("canvas");cv.id="wcv";document.body.append(cv);
+const cx=cv.getContext("2d"),btn=$("wbtn");
+let W=0,H=0,ws=[],raf=0,last=0,mx=-999,my=-999,RL=[];
+const N=14,LS=4,LMIN=18,LMAX=60,CY=2.4,G=900,R=120,ez=t=>t*t*(3-2*t);
+function rs(){const d=window.devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+rs();addEventListener("resize",rs);
+addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY});
+document.addEventListener("mouseleave",()=>{mx=my=-999});
+// punto, normal y tangente sobre el perímetro (sentido horario) de un rect
+function pp(r,s){const P=2*(r.w+r.h);s=((s%P)+P)%P;
+if(s<r.w)return{x:r.l+s,y:r.t,nx:0,ny:-1,tx:1,ty:0};
+s-=r.w;if(s<r.h)return{x:r.r,y:r.t+s,nx:1,ny:0,tx:0,ty:1};
+s-=r.h;if(s<r.w)return{x:r.r-s,y:r.b,nx:0,ny:1,tx:-1,ty:0};
+s-=r.w;return{x:r.l,y:r.b-s,nx:-1,ny:0,tx:0,ty:-1}}
+function coll(){RL=[];document.querySelectorAll(".card,.bub,#alert,.seg,.chip,.t,.ev,#gear").forEach(el=>{const b=el.getBoundingClientRect();if(b.width>30&&b.height>10&&b.bottom>0&&b.top<H&&b.right>0&&b.left<W)RL.push({el,l:b.left,t:b.top,r:b.right,b:b.bottom,w:b.width,h:b.height})})}
+function rect(w){if(!w.el)return{l:0,t:H-1,r:W,b:H+30,w:W,h:31};const b=w.el.getBoundingClientRect();return{l:b.left,t:b.top,r:b.right,b:b.bottom,w:b.width,h:b.height}}
+function mkw(i){const x=30+Math.random()*(W-60);return{mode:"wait",delay:i*.4,x,y:-8,vx:(Math.random()-.5)*220,vy:0,pts:Array.from({length:N},()=>({x,y:-8})),age:0,life:20+Math.random()*8,el:null,sT0:0,dir:1,u:0,spd:1}}
+function land(w,r,k){const rr=r||{l:0,t:H-1,r:W,b:H+30,w:W,h:31};let s,dir;
+if(k==="t"||k==="f"){s=w.x-rr.l;dir=w.vx>=0?1:-1}
+else if(k==="l"){s=2*rr.w+rr.h+(rr.b-w.y);dir=1}else{s=rr.w+(w.y-rr.t);dir=-1}
+w.mode="crawl";w.el=r?r.el:null;w.dir=dir;w.sT0=s-dir*LMIN;w.u=0;w.spd=1+Math.min(1.5,Math.abs(w.vx)/150);w.vx=w.vy=0}
+function fall(w,dt){const px=w.x,py=w.y,dx=w.x-mx,dy=w.y-my,d=Math.hypot(dx,dy);
+if(d<R&&d>0){const f=(1-d/R)*1800*dt;w.vx+=dx/d*f;w.vy+=dy/d*f*.6}
+w.vy+=G*dt;w.x+=w.vx*dt;w.y+=w.vy*dt;
+if(w.x<2){w.x=2;w.vx=Math.abs(w.vx)*.5}else if(w.x>W-2){w.x=W-2;w.vx=-Math.abs(w.vx)*.5}
+const h=w.pts[N-1];h.x=w.x;h.y=w.y;
+for(let i=N-2;i>=0;i--){const a=w.pts[i],b=w.pts[i+1],ex=a.x-b.x,ey=a.y-b.y,l=Math.hypot(ex,ey)||1;if(l>LS){a.x=b.x+ex/l*LS;a.y=b.y+ey/l*LS}}
+for(const r of RL){if(w.vy>0&&w.x>=r.l&&w.x<=r.r&&py<r.t&&w.y>=r.t)return land(w,r,"t");
+if(w.y>r.t&&w.y<r.b){if(px<r.l&&w.x>=r.l)return land(w,r,"l");if(px>r.r&&w.x<=r.r)return land(w,r,"r")}}
+if(w.y>=H-1){w.y=H-1;land(w,null,"f")}}
+function flip(w,s){w.dir*=-1;w.sT0=s;w.u=0}
+function away(w,ax,ay){const h=w.pts[N-1],n=w.hn||{nx:0,ny:-1};let vx=ax*260,vy=ay*260-140;const d=vx*n.nx+vy*n.ny;if(d<0){vx-=2*d*n.nx;vy-=2*d*n.ny}w.mode="fall";w.x=h.x+n.nx*3;w.y=h.y+n.ny*3;w.vx=vx;w.vy=vy;w.el=null}
+function crawl(w,dt){const r=rect(w);
+if(w.el&&(!w.el.isConnected||r.w<30||r.h<10||r.b<0||r.t>H)){const h=w.pts[N-1];w.mode="fall";w.x=h.x;w.y=h.y;w.vx=w.vy=0;w.el=null;return}
+w.u+=dt*w.spd/CY;w.spd+=(1-w.spd)*dt*1.5;
+const d=w.dir,P=2*(r.w+r.h);
+if(w.u>=1){w.u-=1;w.sT0+=d*(LMAX-LMIN);
+if(w.el){const sh=w.sT0+d*LMIN;let cs=null;
+for(const c of[0,r.w,r.w+r.h,2*r.w+r.h]){const df=(((sh-c+P/2)%P)+P)%P-P/2;if(Math.abs(df)<25)cs=c}
+if(cs!==null&&Math.random()<.5){const a=pp(r,cs+d*5),b=pp(r,cs-d*5);w.mode="fall";w.x=a.x;w.y=a.y;w.vx=b.tx*d*150;w.vy=b.ty*d*150;w.el=null;return}}}
+// ciclo: extender (cabeza avanza, cola anclada) → anclar cabeza → arquear (cola avanza)
+const u=w.u;let sT,sH,ar;
+if(u<.45){const e=ez(u/.45);sT=w.sT0;sH=sT+d*(LMIN+(LMAX-LMIN)*e);ar=1-e}
+else if(u<.55){sT=w.sT0;sH=sT+d*LMAX;ar=0}
+else{const e=ez((u-.55)/.45);sT=w.sT0+d*(LMAX-LMIN)*e;sH=w.sT0+d*LMAX;ar=e}
+if(!w.el&&((d>0&&sH>r.w-3)||(d<0&&sH<3))){flip(w,sH);return}
+w.hn=pp(r,sH);
+for(let i=0;i<N;i++){const t=i/(N-1),p=pp(r,sT+(sH-sT)*t),a=Math.sin(Math.PI*t)*14*ar;w.pts[i].x=p.x+p.nx*a;w.pts[i].y=p.y+p.ny*a}
+const m=w.pts[N>>1],dx=m.x-mx,dy=m.y-my,dd=Math.hypot(dx,dy);
+if(dd<R&&dd>0){const h=w.pts[N-1],t0=w.pts[0];if((h.x-t0.x)*dx+(h.y-t0.y)*dy<0)flip(w,sH);w.spd=2.4;if(dd<R*.4&&Math.random()<.05)away(w,dx/dd,dy/dd)}}
+function loop(t){const dt=Math.min(.05,(t-last)/1000||.016);last=t;coll();cx.clearRect(0,0,W,H);
+const col=getComputedStyle(document.documentElement).getPropertyValue("--tx").trim()||"#000";
+for(const w of ws){if(w.mode==="wait"){w.delay-=dt;if(w.delay>0)continue;w.mode="fall"}
+w.age+=dt;(w.mode==="fall"?fall:crawl)(w,dt);
+cx.globalAlpha=Math.max(0,Math.min(1,w.age/.6,(w.life-w.age)/4));cx.strokeStyle=col;cx.lineWidth=1;cx.beginPath();
+w.pts.forEach((p,i)=>i?cx.lineTo(p.x,p.y):cx.moveTo(p.x,p.y));cx.stroke()}
+cx.globalAlpha=1;ws=ws.filter(w=>w.age<w.life);
+if(ws.length)raf=requestAnimationFrame(loop);else{cx.clearRect(0,0,W,H);raf=0;btn.classList.remove("on");btn.setAttribute("aria-pressed","false")}}
+btn.onclick=()=>{if(ws.length){ws=[];cancelAnimationFrame(raf);raf=0;cx.clearRect(0,0,W,H);btn.classList.remove("on");btn.setAttribute("aria-pressed","false");return}
+for(let i=0;i<5;i++)ws.push(mkw(i));btn.classList.add("on");btn.setAttribute("aria-pressed","true");last=performance.now();raf=requestAnimationFrame(loop)};
+})();
+let dp;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;$("inst").style.display=""});
+$("inst").onclick=()=>{if(dp){dp.prompt();dp=null;$("inst").style.display="none"}};
+try{if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
 setPet();
 setAn();head();draw();
 </script></body></html>
